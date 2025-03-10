@@ -1,0 +1,23 @@
+name: Exploring Workflow Filters and Activities
+
+on:
+    workflow_dispatch:
+        # schedule:
+        #     -cron: 
+    push:
+        branches:
+            -  main
+            -   '!feature/*'
+    pull_request:
+        types:
+            -   opened
+            -   closed
+        paths-ignore:
+            -   README.md #if any changes are made in the readme file, workflow wont run except its a pull request
+        branches:
+            -   main    #workflow will only run on pull request that target specific branches 
+jobs:
+    hello:
+        runs-on: ubuntu-latest
+        steps:
+            -   run: echo this workflow/job/step is executed for event type - ${{ github.event_name }}
